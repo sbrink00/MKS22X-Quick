@@ -9,7 +9,7 @@ public class Quick{
     int pivIndex = r.nextInt(start - end) + start;
     swap(data, 0, pivIndex);
     for (int idx = start; idx < end; idx ++){
-      if (data[idx] > pivot)  
+      if (data[idx] > pivot) swap(data, idx, end - idx);
     }
   }
 
