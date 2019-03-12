@@ -19,4 +19,12 @@ public class Quick{
     data[idx2] = temp;
   }
 
+  public static String intString(int[] ary){
+    String output = "[";
+    for (int idx = 0; idx < ary.length; idx ++){
+      output += ary[idx] + ", ";
+    }
+    return output.substring(0, output.length() - 2);
+  }
+
 }
