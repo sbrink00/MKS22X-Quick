@@ -9,12 +9,25 @@ public class Quick{
   public static int partition(int[] data, int start, int end){
     Random r = new Random();
     int pivIndex = r.nextInt(end - start) + start;
-    System.out.println(pivIndex + ": " + data[pivIndex]);
+    int pivot = data[pivIndex];
     swap(data, start, pivIndex);
-    for (int idx = start + 1; idx < end; idx ++){
-      if (data[idx] > data[pivIndex]) swap(data, idx, end - idx);
+    int i = start + 1;
+    int j = end;
+    while (i != j){
+      if (data[i] < pivot) i ++;
+      else if (data[i] >= pivot){
+        swap(data, i, j);
+        j --;
+      }
     }
-    return -1;
+    if (data[i] < pivot){
+      swap(data, start, i);
+      return i;
+    }
+    else{
+      swap(data, start, i - 1);
+      return i - 1;
+    }
   }
 
   public static void swap(int[] data, int idx1, int idx2){
