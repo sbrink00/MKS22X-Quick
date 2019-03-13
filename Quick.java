@@ -25,9 +25,9 @@ public class Quick{
 
   public static int quickselect(int []data, int k){
     Random r = new Random();
-    int pivIndex = r.nextInt();
     int i = 0;
     int j = data.length - 1;
+    int pivIndex = r.nextInt(j - i) + i;
     while (pivIndex != k){
       pivIndex = partition(data, i, j);
       if (pivIndex == k) return data[pivIndex];
