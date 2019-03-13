@@ -6,6 +6,17 @@ public class Quick{
     System.out.println(intString(ary));
   }
 
+  public static int quickselect(int []data, int k){
+    Random r = new Random();
+    int pivIndex = r.nextInt();
+    int i = 0;
+    int j = k.length() - 1;
+    while (pivIndex != k){
+      partition(data, i, k);
+
+    }
+  }
+
   public static int partition(int[] data, int start, int end){
     Random r = new Random();
     int pivIndex = r.nextInt(end - start) + start;
