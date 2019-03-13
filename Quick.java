@@ -16,10 +16,11 @@ public class Quick{
   }
 
   public static void quicksort(int[] ary, int lo, int hi){
+    //dont use zero as a parameter, use lo and high
     if (lo >= hi) return;
     int pivot = partition(ary, lo, hi);
-    quicksort(ary, 0, pivot - 1);
-    quicksort(ary, pivot + 1, ary.length - 1);
+    quicksort(ary, lo, pivot - 1);
+    quicksort(ary, pivot + 1, hi);
   }
 
   public static int quickselect(int []data, int k){
