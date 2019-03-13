@@ -2,7 +2,7 @@ import java.util.Random;
 public class Quick{
   public static void main(String[]args){
     int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
-    System.out.println(quickSelect(data, 2));
+    System.out.println(quickSelect(ary, 2));
     //partition(ary, 0, ary.length - 1);
     //System.out.println(intString(ary));
   }
@@ -11,7 +11,7 @@ public class Quick{
     Random r = new Random();
     int pivIndex = r.nextInt();
     int i = 0;
-    int j = data.length() - 1;
+    int j = data.length - 1;
     while (pivIndex != k){
       pivIndex = partition(data, i, j);
       if (pivIndex == k) return data[pivIndex];
