@@ -2,9 +2,24 @@ import java.util.Random;
 public class Quick{
   public static void main(String[]args){
     int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
-    System.out.println(quickSelect(ary, 2));
+    //System.out.println(quickselect(ary, 2));
     //partition(ary, 0, ary.length - 1);
-    //System.out.println(intString(ary));
+    quicksort(ary, 0, ary.length - 1);
+    System.out.println(intString(ary));
+    /*int[] data = { 2, 10, 15, 23, 0,  5};
+    System.out.println(quickselect( ary , 0 ));//  would return 0
+    System.out.println(quickselect( ary , 1 ));//  would return 2
+    System.out.println(quickselect( ary , 2 ));//  would return 5
+    System.out.println(quickselect( ary , 3 ));//  would return 10
+    System.out.println(quickselect( ary , 4 ));//  would return 15
+    System.out.println(quickselect( ary , 5 ));//  would return 23*/
+  }
+
+  public static void quicksort(int[] ary, int lo, int hi){
+    if (lo >= hi) return;
+    int pivot = partition(ary, lo, hi);
+    quicksort(ary, 0, pivot - 1);
+    quicksort(ary, pivot + 1, ary.length - 1);
   }
 
   public static int quickselect(int []data, int k){
@@ -18,13 +33,14 @@ public class Quick{
       if (pivIndex > k) j = pivIndex - 1;
       if (pivIndex < k) i = pivIndex + 1;
     }
+    return data[pivIndex];
   }
 
   public static int partition(int[] data, int start, int end){
+    if (data.length == 1) return 0;
     Random r = new Random();
     int pivIndex = r.nextInt(end - start) + start;
     int pivot = data[pivIndex];
-    System.out.println(pivot);
     swap(data, start, pivIndex);
     int i = start + 1;
     int j = end;
