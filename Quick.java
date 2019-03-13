@@ -2,18 +2,21 @@ import java.util.Random;
 public class Quick{
   public static void main(String[]args){
     int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
-    partition(ary, 0, ary.length - 1);
-    System.out.println(intString(ary));
+    System.out.println(quickSelect(data, 2));
+    //partition(ary, 0, ary.length - 1);
+    //System.out.println(intString(ary));
   }
 
   public static int quickselect(int []data, int k){
     Random r = new Random();
     int pivIndex = r.nextInt();
     int i = 0;
-    int j = k.length() - 1;
+    int j = data.length() - 1;
     while (pivIndex != k){
-      partition(data, i, k);
-
+      pivIndex = partition(data, i, j);
+      if (pivIndex == k) return data[pivIndex];
+      if (pivIndex > k) j = pivIndex - 1;
+      if (pivIndex < k) i = pivIndex + 1;
     }
   }
 
