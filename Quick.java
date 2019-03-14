@@ -1,11 +1,19 @@
+import java.util.Arrays;
 import java.util.Random;
 public class Quick{
   public static void main(String[]args){
     int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
     //System.out.println(quickselect(ary, 2));
     //partition(ary, 0, ary.length - 1);
-    quicksort(ary, 0, ary.length - 1);
-    System.out.println(intString(ary));
+    //quicksort(ary, 0, ary.length - 1);
+    //System.out.println(Arrays.toString(ary));
+    int[] qs = new int[2000000];
+    Random r = new Random();
+    for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(10000);
+    int[] as = qs;
+    quicksort(qs, 0, qs.length - 1);
+    //Arrays.sort(as);
+    System.out.println(Arrays.equals(qs, as));
     /*int[] data = { 2, 10, 15, 23, 0,  5};
     System.out.println(quickselect( ary , 0 ));//  would return 0
     System.out.println(quickselect( ary , 1 ));//  would return 2
