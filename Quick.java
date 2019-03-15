@@ -7,16 +7,16 @@ public class Quick{
     //partition(ary, 0, ary.length - 1);
     //quicksort(ary, 0, ary.length - 1);
     //System.out.println(Arrays.toString(ary));
-    int[] qs = new int[2000000];
-    Random r = new Random();
-    for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(10000);
-    int[] as = qs;
-    quicksort(qs, 0, qs.length - 1);
+    //int[] qs = new int[2000000];
+    //Random r = new Random();
+    //for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(10000);
+    //int[] as = qs;
+    //quicksort(qs, 0, qs.length - 1);
     //Arrays.sort(as);
-    System.out.println(Arrays.equals(qs, as));
-    /*int[] data = { 2, 10, 15, 23, 0,  5};
-    System.out.println(quickselect( ary , 0 ));//  would return 0
-    System.out.println(quickselect( ary , 1 ));//  would return 2
+    //System.out.println(Arrays.equals(qs, as));
+    int[] data = { 2, 10, 15, 23, 0,  5};
+    System.out.println(quickselect(data , 0));//  would return 0
+    /*System.out.println(quickselect( ary , 1 ));//  would return 2
     System.out.println(quickselect( ary , 2 ));//  would return 5
     System.out.println(quickselect( ary , 3 ));//  would return 10
     System.out.println(quickselect( ary , 4 ));//  would return 15
@@ -41,6 +41,7 @@ public class Quick{
       if (pivIndex == k) return data[pivIndex];
       if (pivIndex > k) j = pivIndex - 1;
       if (pivIndex < k) i = pivIndex + 1;
+      System.out.println(Arrays.toString(data));
     }
     return data[pivIndex];
   }
