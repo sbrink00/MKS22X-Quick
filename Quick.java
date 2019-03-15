@@ -54,9 +54,16 @@ public class Quick{
     int idx = 1;
     while (i != j){
       if (data[i] < pivot) i ++;
-      else if (data[i] >= pivot){
+      else if (data[i] > pivot){
         swap(data, i, j);
         j --;
+      }
+      else if (data[i] == pivot){
+        if (r.nextInt(2) == 0){
+          swap(data, i, j);
+          j--;
+        }
+        else i ++;
       }
       idx ++;
     }
