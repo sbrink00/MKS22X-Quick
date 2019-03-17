@@ -7,13 +7,14 @@ public class Quick{
     //partition(ary, 0, ary.length - 1);
     //quicksort(ary, 0, ary.length - 1);
     //System.out.println(Arrays.toString(ary));
-    int[] qs = new int[2 ^ 31 - 1];
-    Random r = new Random();
+    int[] qs = new int[100];
+    Random r = new Random(5);
     for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(10000);
     int[] as = qs;
-    quicksort(qs, 0, qs.length - 1);
-    Arrays.sort(as);
-    System.out.println(Arrays.equals(qs, as));
+    System.out.println(quickselect(qs , 40));
+    //quicksort(qs, 0, qs.length - 1);
+    //Arrays.sort(as);
+    //System.out.println(Arrays.equals(qs, as));
     /*int[] data = { 2, 10, 15, 23, 0,  5};
     System.out.println(quickselect(data , 0));//  would return 0
     System.out.println(quickselect(data , 1 ));//  would return 2
@@ -37,18 +38,12 @@ public class Quick{
   public static int quickselect(int[] data, int k){
     int start = 0;
     int end = data.length - 1;
-    int pivIndex = partition(data, start, end);
+    int pivIndex = data.length + 1;
     while (pivIndex != k){
-      if (pivIndex < k){
-        //if (pivIndex == end) return data[pivIndex];
-        start = pivIndex + 1;
-        pivIndex = partition(data, pivIndex + 1, end);
-      }
-      else{
-        //if (pivIndex == start) return data[pivIndex];
-        end = pivIndex - 1;
-        pivIndex = partition(data, start, end);
-      }
+      System.out.println(end - start);
+      pivIndex = partition(data, start, end);
+      if (pivIndex > k) end = pivIndex - 1;
+      else if (pivIndex < k) start = pivIndex + 1;
     }
     return data[pivIndex];
   }
