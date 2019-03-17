@@ -45,15 +45,6 @@ public class Quick{
     return data[pivIndex];
   }
 
-  /*public static int quickselect(int[] data, int k){
-    int pivIndex = partition(data, 0, data.length - 1);
-    while (pivIndex != k){
-      if (pivIndex > k) pivIndex = partition(data, 0, pivIndex);
-      if (pivIndex < k) pivIndex = partition(data, pivIndex, data.length - 1);;
-    }
-    return data[pivIndex];
-  }*/
-
   private static int[] partitionDutch(int[] data, int lo, int hi){
     if (hi == lo) return new int[]{lo, lo};
     Random r = new Random();
