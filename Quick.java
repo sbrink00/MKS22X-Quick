@@ -7,16 +7,15 @@ public class Quick{
     Random r = new Random(5);
     for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(100000000);
     System.out.println(quickselect(qs, 50000000));*/
-    int[] dutch = new int[]{0, 1, 2, 4, 3, 2, 1, 3, 4, 3, 2, 1, 2, 3 ,2, 2, 1, 4, 3};
-    System.out.println(Arrays.toString(partitionDutch(dutch, 0, dutch.length - 1)));
-    System.out.println(Arrays.toString(dutch));
-
   }
+
+  public static void quicksortDutch(int[] data) {quicksortDutch(data, 0, data.length - 1);}
 
   public static void quicksortDutch(int[] data, int lo, int hi){
     if (lo >= hi) return;
     int[] pivots = partitionDutch(data, lo, hi);
-    
+    quicksortDutch(data, lo, pivots[0]);
+    quicksortDutch(data, pivots[1] + 1, hi);
   }
 
   public static void quicksort(int[] data){
@@ -52,7 +51,7 @@ public class Quick{
   }*/
 
   private static int[] partitionDutch(int[] data, int lo, int hi){
-    if (data.length == 1) return new int[2];
+    if (hi == lo) return new int[]{lo, lo};
     Random r = new Random();
     int pivIndex = r.nextInt(hi - lo + 1) + lo;
     int pivot = data[pivIndex];
