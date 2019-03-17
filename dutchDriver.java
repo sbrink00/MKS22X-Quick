@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 public class dutchDriver{
   public static void main(String[] args){
@@ -18,6 +19,7 @@ public class dutchDriver{
       Quick.quicksort(normal);
       long t4 = System.currentTimeMillis();
       long normalTime = t4 - t3;
+      //System.out.println(Arrays.equals(normal, dutch));
       System.out.println("Trial " + idx + ": " + 1.0 * dutchTime/normalTime);
     }
   }
