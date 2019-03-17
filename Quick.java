@@ -2,11 +2,21 @@ import java.util.Arrays;
 import java.util.Random;
 public class Quick{
   public static void main(String[]args){
-    int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
+    /*int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
     int[] qs = new int[100000000];
     Random r = new Random(5);
     for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(100000000);
-    System.out.println(quickselect(qs, 50000000));
+    System.out.println(quickselect(qs, 50000000));*/
+    int[] dutch = new int[]{0, 1, 2, 4, 3, 2, 1, 3, 4, 3, 2, 1, 2, 3 ,2, 2, 1, 4, 3};
+    System.out.println(Arrays.toString(partitionDutch(dutch, 0, dutch.length - 1)));
+    System.out.println(Arrays.toString(dutch));
+
+  }
+
+  public static void quicksortDutch(int[] data, int lo, int hi){
+    if (lo >= hi) return;
+    int[] pivots = partitionDutch(data, lo, hi);
+    
   }
 
   public static void quicksort(int[] data){
@@ -49,9 +59,12 @@ public class Quick{
     swap(data, lo, pivIndex);
     int i = lo + 1;
     int j = hi;
+    System.out.println(pivot);
+    System.out.println(data[lo]);
     while (i != j){
+      System.out.println(i + " " + j);
       if (data[i] <= pivot) i ++;
-      else if (data[i] > pivot){
+      else {
         swap(data, i, j);
         j --;
       }
