@@ -2,11 +2,15 @@ import java.util.Arrays;
 import java.util.Random;
 public class Quick{
   public static void main(String[]args){
-    /*int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
+    //int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
     int[] qs = new int[100000000];
-    Random r = new Random(5);
-    for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(100000000);
-    System.out.println(quickselect(qs, 50000000));*/
+    Random r = new Random();
+    for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(10);
+    int[] as = qs;
+    Arrays.sort(as);
+    //System.out.println("done");
+    quicksortDutch(qs);
+    System.out.println(Arrays.equals(as, qs));
   }
 
   public static void quicksortDutch(int[] data) {quicksortDutch(data, 0, data.length - 1);}
@@ -53,15 +57,16 @@ public class Quick{
   private static int[] partitionDutch(int[] data, int lo, int hi){
     if (hi == lo) return new int[]{lo, lo};
     Random r = new Random();
-    int pivIndex = r.nextInt(hi - lo + 1) + lo;
+    int[][] median = new int[][]{{0, data[lo]}, {1, data[hi]}, {2, data[hi - lo / 2]}};
+    if (median[0][1] > median[1][1]) swap(median, 0, 1);
+    if (median[0][1] > median[2][1]) swap(median, 0, 2);
+    if (median[1][1] > median[2][1]) swap(median, 1, 2);
+    int pivIndex = median[1][0];
     int pivot = data[pivIndex];
     swap(data, lo, pivIndex);
     int i = lo + 1;
     int j = hi;
-    System.out.println(pivot);
-    System.out.println(data[lo]);
     while (i != j){
-      System.out.println(i + " " + j);
       if (data[i] <= pivot) i ++;
       else {
         swap(data, i, j);
@@ -127,6 +132,12 @@ public class Quick{
 
   public static void swap(int[] data, int idx1, int idx2){
     int temp = data[idx1];
+    data[idx1] = data[idx2];
+    data[idx2] = temp;
+  }
+
+  public static void swap(int[][] data, int idx1, int idx2){
+    int[] temp = data[idx1];
     data[idx1] = data[idx2];
     data[idx2] = temp;
   }
