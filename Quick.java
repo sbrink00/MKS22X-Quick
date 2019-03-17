@@ -42,27 +42,40 @@ public class Quick{
   }*/
 
   private static int[] partitionDutch(int[] data, int lo, int hi){
-    if (data.length == 1) return 0;
+    if (data.length == 1) return new int[2];
     Random r = new Random();
-    int pivIndex = r.nextInt(end - start + 1) + start;
+    int pivIndex = r.nextInt(hi - lo + 1) + lo;
     int pivot = data[pivIndex];
-    swap(data, start, pivIndex);
-    int i = start + 1;
-    int j = end;
-    int equalToPivot = 0;
-    while (i < j){
-      if (data[i] <= pivot){
-        if (data[i] == pivot) equalToPivot ++;
-        i ++;
-      }
+    swap(data, lo, pivIndex);
+    int i = lo + 1;
+    int j = hi;
+    while (i != j){
+      if (data[i] <= pivot) i ++;
       else if (data[i] > pivot){
         swap(data, i, j);
         j --;
       }
     }
-    if (data[i] < pivot) swap(data, start, i);
-    else swap(data, start, i - 1);
-    
+    int piv;
+    if (data[i] < pivot){
+      swap(data, lo, i);
+      j = i - 1;
+      piv = i;
+    }
+    else{
+      swap(data, lo, i - 1);
+      j = i - 2;
+      piv = i - 1;
+    }
+    i = 0;
+    while (i != j){
+      if (data[i] == pivot){
+        swap(data, i, j);
+        j --;
+      }
+      else i++;
+    }
+    return new int[]{i, piv};
   }
 
   public static int partition(int[] data, int start, int end){
