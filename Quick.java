@@ -7,20 +7,20 @@ public class Quick{
     //partition(ary, 0, ary.length - 1);
     //quicksort(ary, 0, ary.length - 1);
     //System.out.println(Arrays.toString(ary));
-    int[] qs = new int[10000];
+    int[] qs = new int[2 ^ 31 - 1];
     Random r = new Random();
     for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(10000);
-    //int[] as = qs;
-    //quicksort(qs, 0, qs.length - 1);
-    //Arrays.sort(as);
-    //System.out.println(Arrays.equals(qs, as));
-    int[] data = { 2, 10, 15, 23, 0,  5};
+    int[] as = qs;
+    quicksort(qs, 0, qs.length - 1);
+    Arrays.sort(as);
+    System.out.println(Arrays.equals(qs, as));
+    /*int[] data = { 2, 10, 15, 23, 0,  5};
     System.out.println(quickselect(data , 0));//  would return 0
     System.out.println(quickselect(data , 1 ));//  would return 2
     System.out.println(quickselect(data, 2 ));//  would return 5
-    System.out.println(quickselect(qs, 34));//  would return 10
+    System.out.println(quickselect(data, 3));//  would return 10
     System.out.println(quickselect(data, 4 ));//  would return 15
-    System.out.println(quickselect(data, 5 ));//  would return 23
+    System.out.println(quickselect(data, 5 ));//  would return 23*/
   }
 
   public static void quicksort(int[] data){
@@ -35,13 +35,32 @@ public class Quick{
   }
 
   public static int quickselect(int[] data, int k){
+    int start = 0;
+    int end = data.length - 1;
+    int pivIndex = partition(data, start, end);
+    while (pivIndex != k){
+      if (pivIndex < k){
+        //if (pivIndex == end) return data[pivIndex];
+        start = pivIndex + 1;
+        pivIndex = partition(data, pivIndex + 1, end);
+      }
+      else{
+        //if (pivIndex == start) return data[pivIndex];
+        end = pivIndex - 1;
+        pivIndex = partition(data, start, end);
+      }
+    }
+    return data[pivIndex];
+  }
+
+  /*public static int quickselect(int[] data, int k){
     int pivIndex = partition(data, 0, data.length - 1);
     while (pivIndex != k){
       if (pivIndex > k) pivIndex = partition(data, 0, pivIndex);
       if (pivIndex < k) pivIndex = partition(data, pivIndex, data.length - 1);;
     }
     return data[pivIndex];
-  }
+  }*/
 
   public static int partition(int[] data, int start, int end){
     if (data.length == 1) return 0;
@@ -52,7 +71,7 @@ public class Quick{
     int i = start + 1;
     int j = end;
     int idx = 1;
-    while (i != j){
+    while (i < j){
       if (data[i] < pivot) i ++;
       else if (data[i] > pivot){
         swap(data, i, j);
@@ -67,7 +86,8 @@ public class Quick{
       }
       idx ++;
     }
-    if (data[i] < pivot){
+    if (i == data.length) return i - 1;
+    else if (data[i] < pivot){
       swap(data, start, i);
       return i;
     }
