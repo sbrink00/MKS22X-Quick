@@ -10,28 +10,31 @@ public class Quick{
     int[] qs = new int[10000];
     Random r = new Random();
     for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(10000);
-    //int[] as = qs;
-    //quicksort(qs, 0, qs.length - 1);
+    int[] as = qs;
+    quicksort(qs);
     //Arrays.sort(as);
-    //System.out.println(Arrays.equals(qs, as));
-    int[] data = { 2, 10, 15, 23, 0,  5};
+    System.out.println(Arrays.equals(qs, as));
+    /*int[] data = { 2, 10, 15, 23, 0,  5};
     System.out.println(quickselect(data , 0));//  would return 0
     System.out.println(quickselect(data , 1 ));//  would return 2
     System.out.println(quickselect(data, 2 ));//  would return 5
     System.out.println(quickselect(qs, 34));//  would return 10
     System.out.println(quickselect(data, 4 ));//  would return 15
-    System.out.println(quickselect(data, 5 ));//  would return 23
+    System.out.println(quickselect(data, 5 ));//  would return 23*/
   }
 
   public static void quicksort(int[] data){
-    quicksort(data, 0, data.length - 1);
+    quicksort(data, 0, data.length - 1, 100);
   }
 
-  public static void quicksort(int[] ary, int lo, int hi){
-    if (lo >= hi) return;
+  public static void quicksort(int[] ary, int lo, int hi, int minLength){
+    if (hi - lo <= minLength){
+      insertionSort(ary, lo, hi);
+      return;
+    }
     int pivot = partition(ary, lo, hi);
-    quicksort(ary, lo, pivot - 1);
-    quicksort(ary, pivot + 1, hi);
+    quicksort(ary, lo, pivot - 1, minLength);
+    quicksort(ary, pivot + 1, hi, minLength);
   }
 
   public static int quickselect(int[] data, int k){
@@ -74,6 +77,18 @@ public class Quick{
     else{
       swap(data, start, i - 1);
       return i - 1;
+    }
+  }
+
+  public static void insertionSort(int[] ary, int lo, int hi){
+    if (hi - lo == 0) return;
+    for (int idx = lo + 1; idx < hi + 1; idx ++){
+      int val = ary[idx];
+      int i = idx - 1;
+      for (;i >= lo && ary[i] > val; i--){
+        ary[i + 1] = ary[i];
+      }
+      ary[i + 1] = val;
     }
   }
 
