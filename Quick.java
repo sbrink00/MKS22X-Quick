@@ -20,17 +20,18 @@ public class Quick{
     quicksortDutch(data, lo, pivots[0]);
     quicksortDutch(data, pivots[1] + 1, hi);
   }
+
   public static void quicksort(int[] data){
-    quicksort(data, 0, data.length - 1);
+    quicksort(data, 0, data.length - 1, 150);
   }
-  public static void quicksort(int[] ary, int lo, int hi){
-    if (lo - hi < 50){
+  public static void quicksort(int[] ary, int lo, int hi, int minLength){
+    if (hi - lo <= minLength){
       insertionSort(ary, lo, hi);
       return;
-    } 
+    }
     int pivot = partition(ary, lo, hi);
-    quicksort(ary, lo, pivot - 1);
-    quicksort(ary, pivot + 1, hi);
+    quicksort(ary, lo, pivot - 1, minLength);
+    quicksort(ary, pivot + 1, hi, minLength);
   }
 
   public static int quickselect(int[] data, int k){
