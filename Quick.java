@@ -3,13 +3,14 @@ import java.util.Random;
 public class Quick{
   public static void main(String[]args){
     //int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
-    int[] qs = new int[100000000];
+    int[] qs = new int[1000000];
     Random r = new Random();
     for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(10);
-    int[] as = qs;
-    Arrays.sort(as);
+    int[] as = Arrays.copyOf(qs, qs.length);
+    //Arrays.sort(as);
     //System.out.println("done");
     quicksortDutch(qs);
+    System.out.println(Arrays.toString(as));
     System.out.println(Arrays.equals(as, qs));
   }
 
