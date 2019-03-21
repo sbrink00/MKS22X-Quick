@@ -2,16 +2,13 @@ import java.util.Arrays;
 import java.util.Random;
 public class Quick{
   public static void main(String[]args){
-    //int[] ary = new int[]{999,999,999,4,1,0,3,2,999,999,999};
-    int[] qs = new int[1000000];
     Random r = new Random();
-    for (int idx = 0; idx < qs.length; idx ++) qs[idx] = r.nextInt(10);
-    int[] as = Arrays.copyOf(qs, qs.length);
-    //Arrays.sort(as);
-    //System.out.println("done");
-    quicksortDutch(qs);
-    System.out.println(Arrays.toString(as));
-    System.out.println(Arrays.equals(as, qs));
+    int[] ary = new int[1000];
+    for (int idx = 0; idx < ary.length; idx ++) ary[idx] = r.nextInt(5);
+    //System.out.println(Arrays.toString(partitionDutch(ary, 0, ary.length - 1)));
+    //System.out.println(Arrays.toString(ary));
+    quicksort(ary);
+    System.out.println(Arrays.toString(ary));
   }
 
   public static void quicksortDutch(int[] data) {quicksortDutch(data, 0, data.length - 1);}
@@ -19,16 +16,18 @@ public class Quick{
   public static void quicksortDutch(int[] data, int lo, int hi){
     if (lo >= hi) return;
     int[] pivots = partitionDutch(data, lo, hi);
+    System.out.println(Arrays.toString(pivots));
     quicksortDutch(data, lo, pivots[0]);
     quicksortDutch(data, pivots[1] + 1, hi);
   }
-
   public static void quicksort(int[] data){
     quicksort(data, 0, data.length - 1);
   }
-
   public static void quicksort(int[] ary, int lo, int hi){
-    if (lo >= hi) return;
+    if (lo - hi < 50){
+      insertionSort(ary, lo, hi);
+      return;
+    } 
     int pivot = partition(ary, lo, hi);
     quicksort(ary, lo, pivot - 1);
     quicksort(ary, pivot + 1, hi);
@@ -119,6 +118,18 @@ public class Quick{
     else{
       swap(data, start, i - 1);
       return i - 1;
+    }
+  }
+
+  public static void insertionSort(int[] ary, int lo, int hi){
+    if (hi - lo == 0) return;
+    for (int idx = lo + 1; idx < hi + 1; idx ++){
+      int val = ary[idx];
+      int i = idx - 1;
+      for (;i >= lo && ary[i] > val; i--){
+        ary[i + 1] = ary[i];
+      }
+      ary[i + 1] = val;
     }
   }
 
